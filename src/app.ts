@@ -1,4 +1,6 @@
-import { Engine, Scene, ArcRotateCamera, Vector3, HemisphericLight, Mesh, MeshBuilder } from "@babylonjs/core";
+import { Engine, Scene, ArcRotateCamera, Vector3, HemisphericLight, Mesh, MeshBuilder , KeyboardEventTypes, StandardMaterial, Color3} from "@babylonjs/core";
+import '../public/main.css';
+
 class App {
     constructor() {
         // create the canvas html element and attach it to the webpage
@@ -17,10 +19,17 @@ class App {
         const light1: HemisphericLight = new HemisphericLight("light1", new Vector3(1, 1, 0), scene);
         const sphere: Mesh = MeshBuilder.CreateSphere("sphere", { diameter: 1 }, scene);
 
+        const box = MeshBuilder.CreateBox("box", {height: 1 ,width: 1, depth: 1 }, scene);
+        const boxMaterial = new StandardMaterial("boxMat", scene);
+        boxMaterial.diffuseColor = new Color3(1, 0, 1);
+        box.material = boxMaterial;
+        box.position = new Vector3(-3, 1, -4);
+
         // hide/show the Inspector
+        /*
         window.addEventListener("keydown", (ev) => {
-            // Shift+Ctrl+Alt+I
-            if (ev.shiftKey && ev.ctrlKey && ev.altKey && ev.key === 'i') {
+            // Ctrl+I
+            if (ev.ctrlKey && ev.key === 'i') {
                 if (scene.debugLayer.isVisible()) {
                     scene.debugLayer.hide();
                 } else {
@@ -28,6 +37,59 @@ class App {
                 }
             }
         });
+         */
+
+        scene.onKeyboardObservable.add((kbInfo) => {
+            switch (kbInfo.type) {
+                case KeyboardEventTypes.KEYDOWN:
+                    switch (kbInfo.event.key) {
+                        case "i": {
+                            if (scene.debugLayer.isVisible()) {
+                                scene.debugLayer.hide();
+                            } else {
+                                scene.debugLayer.show();
+                            }
+                        }
+                            break;
+                        case "ArrowLeft":
+                        case "a":
+                            box.rotation = new Vector3(0, Math.PI / 2, 0);
+                            break;
+                        case "ArrowRight":
+                        case "d":
+                            box.rotation = new Vector3(0, Math.PI / 2, 0);
+                            break;
+                    }
+                    break;
+            }
+        });
+
+        /*
+        scene.onKeyboardObservable.add((kbInfo) => {
+            switch (kbInfo.type) {
+                case KeyboardEventTypes.KEYDOWN:
+                    switch (kbInfo.event.key) {
+                        case "a":
+                        case "A":
+                            sphere.position.x -= 0.1;
+                            break
+                        case "d":
+                        case "D":
+                            sphere.position.x += 0.1;
+                            break
+                        case "w":
+                        case "W":
+                            sphere.position.y += 0.1;
+                            break
+                        case "s":
+                        case "S":
+                            sphere.position.y -= 0.1;
+                            break
+                    }
+                    break;
+            }
+        });
+        */
 
         // run the main render loop
         engine.runRenderLoop(() => {
