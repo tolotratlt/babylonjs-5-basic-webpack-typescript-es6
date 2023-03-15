@@ -1,6 +1,6 @@
 # BABYLON.js 5 Typescript starter template using webpack 
 
-This repository contains a sample BABYLON.js application.
+This repository contains an example of a BABYLON.js 5 application in TypeScript with a TypeScript Webpack configuration. 
 
 ## Setup
 
