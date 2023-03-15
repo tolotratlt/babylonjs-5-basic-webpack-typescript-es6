@@ -1,4 +1,5 @@
 import { Engine, Scene, ArcRotateCamera, Vector3, HemisphericLight, Mesh, MeshBuilder , KeyboardEventTypes, StandardMaterial, Color3} from "@babylonjs/core";
+import "@babylonjs/inspector";
 import '../public/main.css';
 
 class App {
@@ -24,20 +25,6 @@ class App {
         boxMaterial.diffuseColor = new Color3(1, 0, 1);
         box.material = boxMaterial;
         box.position = new Vector3(-3, 1, -4);
-
-        // hide/show the Inspector
-        /*
-        window.addEventListener("keydown", (ev) => {
-            // Ctrl+I
-            if (ev.ctrlKey && ev.key === 'i') {
-                if (scene.debugLayer.isVisible()) {
-                    scene.debugLayer.hide();
-                } else {
-                    scene.debugLayer.show();
-                }
-            }
-        });
-         */
 
         scene.onKeyboardObservable.add((kbInfo) => {
             switch (kbInfo.type) {
