@@ -64,32 +64,6 @@ class App {
             }
         });
 
-        /*
-        scene.onKeyboardObservable.add((kbInfo) => {
-            switch (kbInfo.type) {
-                case KeyboardEventTypes.KEYDOWN:
-                    switch (kbInfo.event.key) {
-                        case "a":
-                        case "A":
-                            sphere.position.x -= 0.1;
-                            break
-                        case "d":
-                        case "D":
-                            sphere.position.x += 0.1;
-                            break
-                        case "w":
-                        case "W":
-                            sphere.position.y += 0.1;
-                            break
-                        case "s":
-                        case "S":
-                            sphere.position.y -= 0.1;
-                            break
-                    }
-                    break;
-            }
-        });
-        */
 
         // run the main render loop
         engine.runRenderLoop(() => {
